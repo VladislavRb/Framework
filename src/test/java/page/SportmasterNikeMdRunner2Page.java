@@ -1,5 +1,7 @@
 package page;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import util.StringUtils;
@@ -8,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SportmasterNikeMdRunner2Page extends AbstractPage {
-
+    private final Logger logger = LogManager.getRootLogger();
     private JavascriptExecutor jsExecutor;
 
     private final By locatorForPopupWindowHeader = By.xpath("//p[@class='cb-item-popup-head-heading']");
@@ -34,6 +36,7 @@ public class SportmasterNikeMdRunner2Page extends AbstractPage {
 
     public SportmasterNikeMdRunner2Page openPage() {
         driver.get(HOMEPAGE_URL);
+        logger.info("opened page with address: " + HOMEPAGE_URL);
         return this;
     }
 
@@ -43,15 +46,18 @@ public class SportmasterNikeMdRunner2Page extends AbstractPage {
                 .findFirst()
                 .get()
                 .findElement(By.tagName("input"));
+        logger.info("found first available size input");
 
         jsExecutor.executeScript(String.format("document.getElementById('%s').setAttribute('class', 'checked')",
                 firstAvailableSizeInput.getAttribute("id")));
+        logger.info("made first available size input checked");
 
         return this;
     }
 
     public SportmasterNikeMdRunner2Page pressOnInBasketButton() {
         jsExecutor.executeScript("arguments[0].click()", goToBasketLink);
+        logger.info("pressed on InBasket button");
 
         return this;
     }

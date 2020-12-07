@@ -1,27 +1,17 @@
 package test;
 
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
 import page.SportmasterNikeMdRunner2Page;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class BasketTests {
-    private WebDriver driver;
-
-    @BeforeTest (alwaysRun = true)
-    public void browserSetup() {
-        String path = System.getProperty("user.dir");
-        System.setProperty("webdriver.chrome.driver", path + "\\src\\main\\resources\\chromedriver.exe");
-
-        driver = new ChromeDriver();
-    }
-
+public class BasketTests extends CommonConditions{
     @Test
     public void addSneakersToBasketListTest() {
         List<String> expectedResults = Arrays.asList(
@@ -38,11 +28,5 @@ public class BasketTests {
                 .readPopupWindowTitleAndSneakersOrderingStatus();
 
         Assert.assertEquals(actualResults, expectedResults);
-    }
-
-    @AfterTest (alwaysRun = true)
-    public void browserQuit() {
-        driver.quit();
-        driver = null;
     }
 }
