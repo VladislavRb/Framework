@@ -2,6 +2,7 @@ package page;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import util.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,15 +27,9 @@ public class SportmasterNikeMdRunner2Page extends AbstractPage {
     @FindBy(xpath = "//div[@class='cb-item-popup']")
     private WebElement itemPopupWindow;
 
-    private String extractSneakersInfo(String rawSneakersString) {
-        int vendorCodeStartIndex = rawSneakersString.indexOf("\n");
-
-        return rawSneakersString.substring(0, vendorCodeStartIndex);
-    }
-
-    public SportmasterNikeMdRunner2Page(WebDriver driver, JavascriptExecutor jsExecutor) {
+    public SportmasterNikeMdRunner2Page(WebDriver driver) {
         super(driver);
-        this.jsExecutor = jsExecutor;
+        jsExecutor = (JavascriptExecutor) driver;
     }
 
     public SportmasterNikeMdRunner2Page openPage() {
@@ -64,7 +59,7 @@ public class SportmasterNikeMdRunner2Page extends AbstractPage {
     public List<String> readPopupWindowTitleAndSneakersOrderingStatus() {
         return Arrays.asList(
                 itemPopupWindow.findElement(locatorForPopupWindowHeader).getAttribute("innerText").trim(),
-                extractSneakersInfo(itemPopupWindow.findElement(locatorForSneakersName).getAttribute("innerText").trim()),
+                StringUtils.extractSneakersInfo(itemPopupWindow.findElement(locatorForSneakersName).getAttribute("innerText").trim()),
                 itemPopupWindow.findElement(locatorForSneakersPrice).getText(),
                 itemPopupWindow.findElement(locatorForBasketLink).getAttribute("innerText").trim()
         );

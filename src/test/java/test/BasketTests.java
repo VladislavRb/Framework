@@ -13,7 +13,6 @@ import java.util.List;
 
 public class BasketTests {
     private WebDriver driver;
-    private JavascriptExecutor jsExecutor;
 
     @BeforeTest (alwaysRun = true)
     public void browserSetup() {
@@ -21,7 +20,6 @@ public class BasketTests {
         System.setProperty("webdriver.chrome.driver", path + "\\src\\main\\resources\\chromedriver.exe");
 
         driver = new ChromeDriver();
-        jsExecutor = (JavascriptExecutor) driver;
     }
 
     @Test
@@ -33,7 +31,7 @@ public class BasketTests {
                 "Перейти в корзину"
         );
 
-        List<String> actualResults = new SportmasterNikeMdRunner2Page(driver, jsExecutor)
+        List<String> actualResults = new SportmasterNikeMdRunner2Page(driver)
                 .openPage()
                 .chooseFirstAvailableSneakersSize()
                 .pressOnInBasketButton()
