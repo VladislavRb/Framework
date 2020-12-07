@@ -1,4 +1,4 @@
-package pageobject_model.test;
+package test;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import pageobject_model.page.SportmasterNikeMdRunner2Page;
+import page.SportmasterNikeMdRunner2Page;
 
 import java.util.Arrays;
 import java.util.List;

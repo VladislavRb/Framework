@@ -1,4 +1,4 @@
-package pageobject_model.page;
+package page;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
