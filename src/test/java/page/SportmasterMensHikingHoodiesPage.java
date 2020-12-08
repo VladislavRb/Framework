@@ -25,12 +25,14 @@ public class SportmasterMensHikingHoodiesPage extends AbstractPage {
     public SportmasterMensHikingHoodiesPage openPage() {
         driver.get(HOMEPAGE_URL);
         logger.info("opened page with address: " + HOMEPAGE_URL);
+
         return this;
     }
 
     public SportmasterMensHikingHoodiesPage clickOnIcePeakCategoryLink() {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click()", IcePeakCategoryLink);
         logger.info("clicked on IcePeak Category Link");
+
         return this;
     }
 

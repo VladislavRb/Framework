@@ -37,6 +37,7 @@ public class SportmasterNikeMdRunner2Page extends AbstractPage {
     public SportmasterNikeMdRunner2Page openPage() {
         driver.get(HOMEPAGE_URL);
         logger.info("opened page with address: " + HOMEPAGE_URL);
+
         return this;
     }
 
