@@ -9,13 +9,10 @@ import org.testng.annotations.Listeners;
 
 @Listeners({TestListener.class})
 public class CommonConditions {
-
     protected WebDriver driver;
 
-
     @BeforeMethod()
-    public void browserSetup()
-    {
+    public void browserSetup() {
         driver = DriverSingleton.getDriver();
     }
 
