@@ -20,6 +20,9 @@ public class LandingPage extends AbstractPage {
     @FindBy(xpath = "//a[contains(@class, 'changeCountryFlag-kz')]")
     private WebElement kazakhFlagIcon;
 
+    @FindBy(xpath = "//a[contains(@class, 'changeCountryFlag-by')]")
+    private WebElement belarusianFlagIcon;
+
     @FindBy(xpath = "//a[@class='b-basket-toolbar__link-select citySelect']/span")
     private WebElement currentCitySpan;
 
@@ -35,6 +38,10 @@ public class LandingPage extends AbstractPage {
         super(driver);
         language = lang;
         jsExecutor = (JavascriptExecutor) driver;
+    }
+
+    public LandingPage(WebDriver driver) {
+        this(driver, "by");
     }
 
     public LandingPage openPage() {
@@ -56,6 +63,13 @@ public class LandingPage extends AbstractPage {
     public LandingPage chooseKazakhFlagIcon() {
         clickOn(kazakhFlagIcon);
         logger.info("chose icon of Kazakh Flag");
+
+        return this;
+    }
+
+    public LandingPage chooseBelarusianFlagIcon() {
+        clickOn(belarusianFlagIcon);
+        logger.info("chose icon of Belarusian flag");
 
         return this;
     }
