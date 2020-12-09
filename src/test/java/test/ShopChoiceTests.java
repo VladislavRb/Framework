@@ -1,8 +1,23 @@
 package test;
 
-import page.LandingPage;
+import page.ColumbiaMurrPeakJacketPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import util.StringUtils;
 
-public class ShopChoiceTests {
+import java.util.List;
+
+public class ShopChoiceTests extends CommonConditions{
+    @Test
+    public void sortAvailableShopsByAddressTest() {
+        List<String> shopAddressesList = new ColumbiaMurrPeakJacketPage(driver)
+                .openPage()
+                .addJacketToBasket()
+                .goToBasket()
+                .openAvailableShopsList()
+                .clickOnAddressSortParameter()
+                .getAvailableShopAddressesList();
+
+        Assert.assertTrue(StringUtils.stringsListIsSorted(shopAddressesList));
+    }
 }
