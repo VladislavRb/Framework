@@ -40,10 +40,6 @@ public class LandingPage extends AbstractPage {
         jsExecutor = (JavascriptExecutor) driver;
     }
 
-    public LandingPage(WebDriver driver) {
-        this(driver, "by");
-    }
-
     public LandingPage openPage() {
         String fullPageURL = getFullPageURL();
 
