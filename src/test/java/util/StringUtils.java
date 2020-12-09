@@ -6,4 +6,8 @@ public class StringUtils {
 
         return rawSneakersString.substring(0, vendorCodeStartIndex);
     }
+
+    public static String getFullPageURL(String urlWithoutLanguagePart, String language) {
+        return new StringBuilder(urlWithoutLanguagePart).append(language).append("/").toString();
+    }
 }

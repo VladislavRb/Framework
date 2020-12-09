@@ -6,6 +6,10 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import util.StringUtils;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LandingPage extends AbstractPage {
     private final Logger logger = LogManager.getRootLogger();
@@ -26,9 +30,14 @@ public class LandingPage extends AbstractPage {
     @FindBy(xpath = "//a[@class='b-basket-toolbar__link-select citySelect']/span")
     private WebElement currentCitySpan;
 
-    private String getFullPageURL() {
-        return new StringBuilder(HOMEPAGE_URL_WITHOUT_LANGUAGE_PART).append(language).append("/").toString();
-    }
+    @FindBy(xpath = "//div[@class='wrap']//input[@id='autocomplete-ajax']")
+    private WebElement searchInput;
+
+    @FindBy(xpath = "//div[@class='wrap']//input[@class='icn-search']")
+    private WebElement searchButton;
+
+    @FindBy(xpath = "//div[@class='products-list__box-title-full']")
+    private List<WebElement> searchResultsList;
 
     private void clickOn(WebElement clickableWebElement) {
         jsExecutor.executeScript("arguments[0].click()", clickableWebElement);
@@ -40,8 +49,12 @@ public class LandingPage extends AbstractPage {
         jsExecutor = (JavascriptExecutor) driver;
     }
 
+    public LandingPage(WebDriver driver) {
+        this(driver, "by");
+    }
+
     public LandingPage openPage() {
-        String fullPageURL = getFullPageURL();
+        String fullPageURL = StringUtils.getFullPageURL(HOMEPAGE_URL_WITHOUT_LANGUAGE_PART, language);
 
         driver.get(fullPageURL);
         logger.info("opened page with address: " + fullPageURL);
@@ -72,5 +85,19 @@ public class LandingPage extends AbstractPage {
 
     public String getCurrentCity() {
         return currentCitySpan.getText();
+    }
+
+    public LandingPage sendSearchStringToSearchInput(String searchString) {
+        searchInput.sendKeys(searchString);
+        clickOn(searchButton);
+        logger.info("sent search string to search input");
+
+        return this;
+    }
+
+    public List<String> readAllItemTitlesOnPage() {
+        return searchResultsList.stream()
+                .map(searchResult -> searchResult.getAttribute("innerText"))
+                .collect(Collectors.toList());
     }
 }
