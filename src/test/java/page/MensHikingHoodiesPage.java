@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SportmasterMensHikingHoodiesPage extends AbstractPage {
+public class MensHikingHoodiesPage extends AbstractPage {
     private final Logger logger = LogManager.getRootLogger();
     private static final String HOMEPAGE_URL = "http://www.sportmaster.by/catalog/mugskaya_odegda88-dgemperi_i_sviteri26/?filter-170=1866";
 
@@ -18,18 +18,18 @@ public class SportmasterMensHikingHoodiesPage extends AbstractPage {
     @FindBy(xpath = "//a[@class='products-list__box-name']/div[1]")
     private List<WebElement> filteredHoodieTitlesList;
 
-    public SportmasterMensHikingHoodiesPage(WebDriver driver) {
+    public MensHikingHoodiesPage(WebDriver driver) {
         super(driver);
     }
 
-    public SportmasterMensHikingHoodiesPage openPage() {
+    public MensHikingHoodiesPage openPage() {
         driver.get(HOMEPAGE_URL);
         logger.info("opened page with address: " + HOMEPAGE_URL);
 
         return this;
     }
 
-    public SportmasterMensHikingHoodiesPage clickOnIcePeakCategoryLink() {
+    public MensHikingHoodiesPage clickOnIcePeakCategoryLink() {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click()", IcePeakCategoryLink);
         logger.info("clicked on IcePeak Category Link");
 

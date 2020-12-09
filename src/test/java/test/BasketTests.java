@@ -1,12 +1,8 @@
 package test;
 
-import page.SportmasterNikeMdRunner2Page;
+import page.NikeMdRunner2Page;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +17,7 @@ public class BasketTests extends CommonConditions{
                 "Перейти в корзину"
         );
 
-        List<String> actualResults = new SportmasterNikeMdRunner2Page(driver)
+        List<String> actualResults = new NikeMdRunner2Page(driver)
                 .openPage()
                 .chooseFirstAvailableSneakersSize()
                 .pressOnInBasketButton()

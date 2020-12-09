@@ -1,7 +1,6 @@
 package test;
 
 import page.LandingPage;
-import page.LogInPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

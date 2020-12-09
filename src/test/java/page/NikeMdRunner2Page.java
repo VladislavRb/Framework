@@ -9,7 +9,7 @@ import util.StringUtils;
 import java.util.Arrays;
 import java.util.List;
 
-public class SportmasterNikeMdRunner2Page extends AbstractPage {
+public class NikeMdRunner2Page extends AbstractPage {
     private final Logger logger = LogManager.getRootLogger();
     private JavascriptExecutor jsExecutor;
 
@@ -29,19 +29,19 @@ public class SportmasterNikeMdRunner2Page extends AbstractPage {
     @FindBy(xpath = "//div[@class='cb-item-popup']")
     private WebElement itemPopupWindow;
 
-    public SportmasterNikeMdRunner2Page(WebDriver driver) {
+    public NikeMdRunner2Page(WebDriver driver) {
         super(driver);
         jsExecutor = (JavascriptExecutor) driver;
     }
 
-    public SportmasterNikeMdRunner2Page openPage() {
+    public NikeMdRunner2Page openPage() {
         driver.get(HOMEPAGE_URL);
         logger.info("opened page with address: " + HOMEPAGE_URL);
 
         return this;
     }
 
-    public SportmasterNikeMdRunner2Page chooseFirstAvailableSneakersSize() {
+    public NikeMdRunner2Page chooseFirstAvailableSneakersSize() {
         WebElement firstAvailableSizeInput = sneakersSizes.stream()
                 .filter(webElement -> webElement.findElement(By.tagName("input")).isEnabled())
                 .findFirst()
@@ -56,7 +56,7 @@ public class SportmasterNikeMdRunner2Page extends AbstractPage {
         return this;
     }
 
-    public SportmasterNikeMdRunner2Page pressOnInBasketButton() {
+    public NikeMdRunner2Page pressOnInBasketButton() {
         jsExecutor.executeScript("arguments[0].click()", goToBasketLink);
         logger.info("pressed on InBasket button");
 
