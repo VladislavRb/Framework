@@ -10,7 +10,17 @@ public class StringUtils {
     }
 
     public static String getFullPageURL(String urlWithoutLanguagePart, String language) {
-        return new StringBuilder(urlWithoutLanguagePart).append(language).append("/").toString();
+        return new StringBuilder(urlWithoutLanguagePart)
+                .append(language)
+                .append("/")
+                .toString();
+    }
+
+    public static String getShopLinkXpathByAddress(String address) {
+        return new StringBuilder("//a[@target='mainframe'][contains(text(), '")
+                .append(address)
+                .append("')]")
+                .toString();
     }
 
     public static boolean stringsListIsSorted(List<String> stringsList) {
