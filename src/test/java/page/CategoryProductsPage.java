@@ -6,33 +6,30 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MensHikingHoodiesPage extends AbstractPage {
-    @FindBy(xpath = "//a[contains(text(), 'IcePeak')]")
-    private WebElement IcePeakCategoryLink;
-
+public class CategoryProductsPage extends AbstractPage {
     @FindBy(xpath = "//a[@class='products-list__box-name']/div[1]")
-    private List<WebElement> filteredHoodieTitlesList;
+    private List<WebElement> filteredProductTitlesList;
 
-    public MensHikingHoodiesPage(WebDriver driver) {
-        super(driver);
+    public CategoryProductsPage(WebDriver driver, String url) {
+        super(driver, url);
     }
 
-    public MensHikingHoodiesPage openPage() {
-        driver.get(HOMEPAGE_URL);
-        logger.info("opened page with address: " + HOMEPAGE_URL);
+    public CategoryProductsPage openPage() {
+        driver.get(url);
+        logger.info("opened page with address: " + url);
 
         return this;
     }
 
-    public MensHikingHoodiesPage clickOnIcePeakCategoryLink() {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click()", IcePeakCategoryLink);
-        logger.info("clicked on IcePeak Category Link");
+    public CategoryProductsPage clickOnCategoryLink(String category) {
+        clickOn(getWebElementByXpath(String.format("//a[contains(text(), %s)]", category)));
+        logger.info(String.format("clicked on %s category Link", category));
 
         return this;
     }
 
     public List<String> readAllItemTitlesOnPage() {
-        return filteredHoodieTitlesList.stream()
+        return filteredProductTitlesList.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }

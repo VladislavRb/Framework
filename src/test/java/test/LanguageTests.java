@@ -7,10 +7,12 @@ import org.testng.annotations.Test;
 public class LanguageTests extends CommonConditions{
     @Test
     public void switchFromBelarusianToKazakhLanguageTest() {
-        String cityAfterLanguageSwitch = new LandingPage(driver, "by")
+        String url = "https://www.sportmaster.by";
+
+        String cityAfterLanguageSwitch = new LandingPage(driver, url)
                 .openPage()
                 .openAvailableLanguagesList()
-                .chooseKazakhFlagIcon()
+                .chooseFlagIcon("kz")
                 .getCurrentCity();
 
         Assert.assertEquals(cityAfterLanguageSwitch, "Нур-Султан");
@@ -18,10 +20,12 @@ public class LanguageTests extends CommonConditions{
 
     @Test
     public void switchFromKazakhToBelarusianLanguageTest() {
-        String cityAfterLanguageSwitch = new LandingPage(driver, "kz")
+        String url = "https://www.sportmaster.kz";
+
+        String cityAfterLanguageSwitch = new LandingPage(driver, url)
                 .openPage()
                 .openAvailableLanguagesList()
-                .chooseBelarusianFlagIcon()
+                .chooseFlagIcon("by")
                 .getCurrentCity();
 
         Assert.assertEquals(cityAfterLanguageSwitch, "Минск");

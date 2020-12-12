@@ -1,6 +1,6 @@
 package test;
 
-import page.MensHikingHoodiesPage;
+import page.CategoryProductsPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -8,10 +8,12 @@ import java.util.List;
 
 public class FilterTests extends CommonConditions{
     @Test
-    public void filterByBrandTest() {
-        List<String> allItemTitlesList = new MensHikingHoodiesPage(driver)
+    public void filterByIcePeakBrandTest() {
+        String url = "http://www.sportmaster.by/catalog/mugskaya_odegda88-dgemperi_i_sviteri26/&filter-170=1866";
+
+        List<String> allItemTitlesList = new CategoryProductsPage(driver, url)
                 .openPage()
-                .clickOnIcePeakCategoryLink()
+                .clickOnCategoryLink("IcePeak")
                 .readAllItemTitlesOnPage();
 
         Assert.assertTrue(allItemTitlesList.stream().allMatch(itemTitle -> itemTitle.contains("IcePeak")));

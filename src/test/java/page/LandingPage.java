@@ -3,23 +3,19 @@ package page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import util.PageUtils;
-import util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LandingPage extends AbstractPage {
-    private String language;
+    @FindBy(xpath = "//meta[@property='og:locale']")
+    private WebElement langMetaTag;
 
     @FindBy(xpath = "//a[contains(@class, 'changeCountryFlag mainFlag')]")
     private WebElement changeCountryButton;
 
-    @FindBy(xpath = "//a[contains(@class, 'changeCountryFlag-kz')]")
-    private WebElement kazakhFlagIcon;
-
-    @FindBy(xpath = "//a[contains(@class, 'changeCountryFlag-by')]")
-    private WebElement belarusianFlagIcon;
+    @FindBy(xpath = "//a[contains(@class, 'changeCountryFlag')]")
+    private List<WebElement> flagIcons;
 
     @FindBy(xpath = "//a[@class='b-basket-toolbar__link-select citySelect']/span")
     private WebElement currentCitySpan;
@@ -35,7 +31,6 @@ public class LandingPage extends AbstractPage {
 
     public LandingPage(WebDriver driver, String url) {
         super(driver, url);
-        language = StringUtils.extractLangFromLandingPageURL(url);
     }
 
     public LandingPage openPage() {
@@ -46,22 +41,19 @@ public class LandingPage extends AbstractPage {
     }
 
     public LandingPage openAvailableLanguagesList() {
-        PageUtils.clickOn(jsExecutor, changeCountryButton);
+        clickOn(changeCountryButton);
         logger.info("opened available languages list");
 
         return this;
     }
 
-    public LandingPage chooseKazakhFlagIcon() {
-        PageUtils.clickOn(jsExecutor, kazakhFlagIcon);
-        logger.info("chose icon of Kazakh Flag");
+    public LandingPage chooseFlagIcon(String countryString) {
+        WebElement chosenCountryFlagIcon = flagIcons.stream()
+                .filter(flagIcon -> flagIcon.getAttribute("class").contains(countryString))
+                .collect(Collectors.toList()).get(0);
 
-        return this;
-    }
-
-    public LandingPage chooseBelarusianFlagIcon() {
-        PageUtils.clickOn(jsExecutor, belarusianFlagIcon);
-        logger.info("chose icon of Belarusian flag");
+        clickOn(chosenCountryFlagIcon);
+        logger.info(String.format("chose icon of %s flag", countryString));
 
         return this;
     }
@@ -72,7 +64,7 @@ public class LandingPage extends AbstractPage {
 
     public LandingPage sendSearchStringToSearchInput(String searchString) {
         searchInput.sendKeys(searchString);
-        PageUtils.clickOn(jsExecutor, searchButton);
+        clickOn(searchButton);
         logger.info("sent search string to search input");
 
         return this;

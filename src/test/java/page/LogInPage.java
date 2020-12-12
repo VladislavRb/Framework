@@ -1,19 +1,11 @@
 package page;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LogInPage extends AbstractPage{
-    private final Logger logger = LogManager.getRootLogger();
-    private static final String HOMEPAGE_URL = "http://www.sportmaster.by/cabinet/";
-
-    private JavascriptExecutor jsExecutor;
-
     @FindBy(id = "auth-email")
     private WebElement emailInput;
 
@@ -29,15 +21,13 @@ public class LogInPage extends AbstractPage{
     @FindBy(xpath = "//div[@class='sm-form__errors-block  errorlogin2']//li")
     private WebElement incorrectLoginOrPasswordLabel;
 
-    public LogInPage(WebDriver driver) {
-        super(driver);
-
-        jsExecutor = (JavascriptExecutor) driver;
+    public LogInPage(WebDriver driver, String url) {
+        super(driver, url);
     }
 
     public LogInPage openPage() {
-        driver.get(HOMEPAGE_URL);
-        logger.info("opened page with address: " + HOMEPAGE_URL);
+        driver.get(url);
+        logger.info("opened page with address: " + url);
 
         return this;
     }
@@ -46,7 +36,7 @@ public class LogInPage extends AbstractPage{
         emailInput.sendKeys(userEmail);
         passwordInput.sendKeys(userPassword);
 
-        jsExecutor.executeScript("arguments[0].click()", logInButton);
+        clickOn(logInButton);
 
         return this;
     }

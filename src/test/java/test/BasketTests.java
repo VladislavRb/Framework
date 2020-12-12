@@ -1,6 +1,6 @@
 package test;
 
-import page.NikeMdRunner2Page;
+import page.ProductPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -10,6 +10,8 @@ import java.util.List;
 public class BasketTests extends CommonConditions{
     @Test
     public void addSneakersToBasketListTest() {
+        String url = "http://www.sportmaster.by/catalogitem/krossovki_mugskie_nike_md_runner_2749794n06010/";
+
         List<String> expectedResults = Arrays.asList(
                 "Товар добавлен в корзину",
                 "Кроссовки мужские Nike Md Runner 2",
@@ -17,11 +19,11 @@ public class BasketTests extends CommonConditions{
                 "Перейти в корзину"
         );
 
-        List<String> actualResults = new NikeMdRunner2Page(driver)
+        List<String> actualResults = new ProductPage(driver, url)
                 .openPage()
-                .chooseFirstAvailableSneakersSize()
+                .chooseFirstAvailableProductSize()
                 .pressOnInBasketButton()
-                .readPopupWindowTitleAndSneakersOrderingStatus();
+                .readPopupWindowTitleAndProductOrderingStatus();
 
         Assert.assertEquals(actualResults, expectedResults);
     }
