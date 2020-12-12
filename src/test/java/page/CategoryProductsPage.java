@@ -1,7 +1,5 @@
 package page;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
@@ -9,9 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MensHikingHoodiesPage extends AbstractPage {
-    private final Logger logger = LogManager.getRootLogger();
-    private static final String HOMEPAGE_URL = "http://www.sportmaster.by/catalog/mugskaya_odegda88-dgemperi_i_sviteri26/?filter-170=1866";
-
     @FindBy(xpath = "//a[contains(text(), 'IcePeak')]")
     private WebElement IcePeakCategoryLink;
 
