@@ -23,6 +23,16 @@ public class StringUtils {
                 .toString();
     }
 
+    public static String extractLangFromLandingPageURL(String landingPageURL) {
+        int urlStringLength = landingPageURL.length();
+
+        if (landingPageURL.charAt(urlStringLength - 1) == '/') {
+            return landingPageURL.substring(urlStringLength - 2);
+        }
+
+        return landingPageURL.substring(urlStringLength - 3, 2);
+    }
+
     public static boolean stringsListIsSorted(List<String> stringsList) {
         String maxString = "";
 
