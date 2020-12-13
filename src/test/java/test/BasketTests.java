@@ -22,7 +22,7 @@ public class BasketTests extends CommonConditions{
         List<String> actualResults = new ProductPage(driver, url)
                 .openPage()
                 .chooseFirstAvailableProductSize()
-                .pressOnInBasketButton()
+                .clickOnAddToBasketLink()
                 .readPopupWindowTitleAndProductOrderingStatus();
 
         Assert.assertEquals(actualResults, expectedResults);

@@ -37,6 +37,7 @@ public class LogInPage extends AbstractPage{
         passwordInput.sendKeys(userPassword);
 
         clickOn(logInButton);
+        logger.info("sent email and password to input fields");
 
         return this;
     }

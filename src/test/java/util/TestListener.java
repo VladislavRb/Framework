@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 
 
 public class TestListener implements ITestListener {
-    private Logger log = LogManager.getRootLogger();
+    private Logger logger = LogManager.getRootLogger();
 
     public void onTestStart(ITestResult iTestResult) {
 
@@ -57,7 +57,7 @@ public class TestListener implements ITestListener {
                             + getCurrentTimeAsString() +
                             ".png"));
         } catch (IOException e) {
-            log.error("Failed to save screenshot: " + e.getLocalizedMessage());
+            logger.error("Failed to save screenshot: " + e.getLocalizedMessage());
         }
     }
 

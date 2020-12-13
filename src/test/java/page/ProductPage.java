@@ -14,9 +14,6 @@ public class ProductPage extends AbstractPage {
     @FindBy(xpath = "//a[text()='В корзину']")
     private WebElement addToBasketLink;
 
-    @FindBy(xpath = "//div[@class='cb-item-popup']")
-    private WebElement itemPopupWindow;
-
     @FindBy(xpath = "//p[@class='cb-item-popup-head-heading']")
     private WebElement popupWindowHeader;
 
@@ -53,16 +50,16 @@ public class ProductPage extends AbstractPage {
         return this;
     }
 
-    public ProductPage pressOnInBasketButton() {
-        clickOn(goToBasketLink);
-        logger.info("pressed on InBasket button");
+    public ProductPage clickOnAddToBasketLink() {
+        clickOn(addToBasketLink);
+        logger.info("clicked on addToBasket link");
 
         return this;
     }
 
     public List<String> readPopupWindowTitleAndProductOrderingStatus() {
         return Arrays.asList(
-                itemPopupWindow.getAttribute("innerText").trim(),
+                popupWindowHeader.getAttribute("innerText").trim(),
                 StringUtils.extractSneakersInfo(productNameLabel.getAttribute("innerText").trim()),
                 productPriceLabel.getText(),
                 goToBasketLink.getAttribute("innerText").trim()

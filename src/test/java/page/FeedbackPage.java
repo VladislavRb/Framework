@@ -70,7 +70,6 @@ public class FeedbackPage extends AbstractPage{
 
         clickOn(userAgreementCheckbox);
         executeScript("document.getElementsByTagName('iframe')[1].remove();");
-
         logger.info("sent all provided data to corresponding fields");
 
         return this;
@@ -79,7 +78,6 @@ public class FeedbackPage extends AbstractPage{
     public FeedbackPage clickOnSendFeedbackButton() {
         executeScript("arguments[0].removeAttribute('disabled')", sendFeedbackButton);
         clickOn(sendFeedbackButton);
-
         logger.info("clicked on send feedback button");
 
         return this;

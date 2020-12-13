@@ -22,15 +22,15 @@ public class CategoryProductsPage extends AbstractPage {
     }
 
     public CategoryProductsPage clickOnCategoryLink(String category) {
-        clickOn(getWebElementByXpath(String.format("//a[contains(text(), %s)]", category)));
-        logger.info(String.format("clicked on %s category Link", category));
+        clickOn(getWebElementByXpath(String.format("//a[contains(text(), '%s')]", category)));
+        logger.info(String.format("clicked on %s category link", category));
 
         return this;
     }
 
     public List<String> readAllItemTitlesOnPage() {
         return filteredProductTitlesList.stream()
-                .map(WebElement::getText)
+                .map(webElement -> webElement.getAttribute("innerText"))
                 .collect(Collectors.toList());
     }
 }
